@@ -1,0 +1,72 @@
+//with test cases 
+const readline = require("readline");
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+
+let theFunctions = nums => {
+    console.log(nums);
+    
+};
+const handleTestCases = () => {
+    rl.question("", (testCase) => {
+        testCase = parseInt(testCase);
+        let count = 0;
+        const handleInput = () => {
+            rl.question("", (input) => {
+                const [a, b, c, d] = input.split(" ").map(Number);
+                theFunctions(a, b, c, d);
+                count++;
+                if (count < testCase) {
+                    handleInput();
+                } else {
+                    rl.close();
+                }
+            });
+        };
+        handleInput();
+    });
+};
+handleTestCases();
+
+
+/// test case then input the numberOfInput then input numbers
+
+//with test cases 
+const readline = require("readline");
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+
+let theFunctions = (n,numsArr) => {
+    console.log(n,numsArr);
+    
+};
+const handleTestCases = () => {
+    rl.question("", (testCase) => {
+        testCase = parseInt(testCase);
+        let count = 0;
+        const handleInput = () => {
+            rl.question("", (numberOfInput) => {
+                let  n = numberOfInput.split(" ").map(Number)
+                rl.question("", (nums) => {
+                    const numsArr = nums.split(" ").map(Number);
+                    theFunctions(n[0],numsArr);
+                    count++;
+                    if (count < testCase) {
+                        handleInput();
+                    } else {
+                        rl.close();
+                    }
+                });
+            });
+            
+        };
+        handleInput();
+    });
+};
+handleTestCases();

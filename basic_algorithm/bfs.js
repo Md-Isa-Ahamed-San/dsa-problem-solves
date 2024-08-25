@@ -1,0 +1,3 @@
+class newNode(val){
+    this.
+}

@@ -1,0 +1,19 @@
+Here are the 10 bitwise tricks covered in the video:
+
+1. **Check if a number is even or odd:** You can check if a number is even or odd by looking at the least significant bit of its binary representation. If the least significant bit is 1, the number is odd. If the least significant bit is 0, the number is even. You can do this by using the bitwise AND operator (&) with 1. For example, `x & 1` will return 1 if x is odd and 0 if x is even.
+2. **Check if a number is a power of two:** A number is a power of two if its binary representation has only one 1 bit. You can check this by subtracting 1 from the number and then performing a bitwise AND operation with the original number. If the result is 0, then the number is a power of two. For example, `(x - 1) & x == 0` will be true if x is a power of two.
+3. **Get the kth bit of a number:** You can get the kth bit of a number (where k is 0-indexed) by performing a bitwise AND operation with a number that has a 1 in the kth position and 0s in all other positions. For example, to get the 3rd bit of x, you can use `x & (1 << 2)`.
+4. **Swap two variables without using a temporary variable:** You can swap two variables without using a temporary variable by using the bitwise XOR operator (^). For example, to swap x and y, you can do the following:
+
+```
+x = x ^ y;
+y = x ^ y;
+x = x ^ y;
+```
+
+5. **Number of set bits in a number:** The number of set bits in a number is equal to the number of 1s in its binary representation. You can count the number of set bits by iterating over all the bits and checking if each bit is 1. However, there are more efficient ways to do this, such as using the built-in popcount function in C++.
+6. **Number of set bits in a + b and a ^ b:** The number of set bits in a + b is equal to the number of set bits in a xor b plus twice the number of bits that are set in both a and b. The number of set bits in a ^ b is equal to the number of bits that are set in a xor the number of bits that are set in b.
+7. **Toggle a bit:** You can toggle a bit (change it from 0 to 1 or vice versa) by performing a bitwise XOR operation with 1. For example, `x ^ (1 << k)` will toggle the kth bit of x.
+8. **Set a bit:** You can set a bit to 1 by performing a bitwise OR operation with a number that has a 1 in the desired position and 0s in all other positions. For example, `x | (1 << k)` will set the kth bit of x to 1.
+9. **Clear a bit:** You can clear a bit to 0 by performing a bitwise AND operation with a number that has a 0 in the desired position and 1s in all other positions. For example, `x & ~(1 << k)` will clear the kth bit of x to 0.
+10. **Check if two numbers have the same sign:** You can check if two numbers have the same sign by performing a bitwise AND operation with their sign bits. The sign bit is the most significant bit of the number. If the result of the AND operation is 0, then the two numbers have different signs. If the result is not 0, then the two numbers have the same sign.
