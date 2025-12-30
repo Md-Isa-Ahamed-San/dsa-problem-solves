@@ -102,33 +102,19 @@ def upper_bound(arr, x):
 
 # ---------- SOLVE ----------
 def solve():
-    t = int(input())
-    prev_old = -1
-    prev_new = -1
-    ans = ""
-    is_sorted = True
-    for _ in range(t):
-        old, new = map(int, input().strip().split())
-        # print(old,new,prev_old,prev_new)
-        if new != old:
-            ans = "rated"
-            break
-        if (prev_old == -1) and (prev_new == -1):
-            prev_old = old
-            prev_new = new
-
-        elif (prev_old < old) or (prev_new < new):
-            is_sorted = False
-        prev_new = new
-        prev_old = old
-    # print(ans, is_sorted)
-    if ans == "rated":
-        print("rated")
-    else:
-        if is_sorted:
-            print("maybe")
-        else:
-            print("unrated")
+    n = int(input())
+    a = input()
+    first_r = a.find("R")
+    last_r = a.rfind("R")
+    first_l = a.find("L")
+    last_l = a.rfind("L")
+    # print(first_r,last_r)
+    if first_r != -1 and first_l != -1:
+        print(first_r + 1, first_l)
+    elif first_r != -1 and first_l == -1:
+        print(first_r + 1, last_r + 2)
+    else:  # first_r == -1 and first_l!= -1
+        print(last_l + 1, first_l)
 
 
 # ---------- MAIN ----------

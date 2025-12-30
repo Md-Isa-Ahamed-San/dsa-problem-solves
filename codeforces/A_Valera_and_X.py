@@ -102,33 +102,40 @@ def upper_bound(arr, x):
 
 # ---------- SOLVE ----------
 def solve():
-    t = int(input())
-    prev_old = -1
-    prev_new = -1
-    ans = ""
-    is_sorted = True
-    for _ in range(t):
-        old, new = map(int, input().strip().split())
-        # print(old,new,prev_old,prev_new)
-        if new != old:
-            ans = "rated"
-            break
-        if (prev_old == -1) and (prev_new == -1):
-            prev_old = old
-            prev_new = new
+    n = int(input().strip())
+    m = []
 
-        elif (prev_old < old) or (prev_new < new):
-            is_sorted = False
-        prev_new = new
-        prev_old = old
-    # print(ans, is_sorted)
-    if ans == "rated":
-        print("rated")
-    else:
-        if is_sorted:
-            print("maybe")
-        else:
-            print("unrated")
+    for i in range(n):
+        col_str = input().strip()
+        m.append(col_str)
+    diag_val = m[0][0]
+    norm_val = m[0][1]
+    if diag_val == norm_val:
+        print("NO")
+        return
+    ans = "YES"
+    left = 0
+    right = n - 1
+    # print(diag_val,norm_val)
+    for i in range(n):
+        for j in range(n):
+            # print(i,j,left,right)
+            # print(j,left,right,m[i][j],diag_val)
+            if j == left or j == right:
+                if m[i][j] != diag_val:
+                    ans = "NO"
+                # print("no")
+                # break
+            elif m[i][j] != norm_val:
+                ans = "NO"
+                # print(i,j)
+                # print("no")
+                # break
+        left += 1
+        right -= 1
+        if ans == "NO":
+            break
+    print(ans)
 
 
 # ---------- MAIN ----------
