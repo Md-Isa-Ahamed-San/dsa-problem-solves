@@ -1,5 +1,5 @@
 # --------------------------------
-#  Problem : A_Design_Tutorial_Learn_from_Math
+#  Problem : A_Gregor_and_Cryptography
 #  Author  : Md Isa Ahamed San
 #  Date    : 2026-01-02
 # --------------------------------
@@ -141,12 +141,12 @@ def upper_bound(arr, target):
 
 # ---------- SOLVE ----------
 def solve():
-    n = int(input().strip())
-
-    if n % 2 == 0:
-        print(4, n - 4)
-    else:
-        print(9, n - 9)
+    t = int(input().strip())
+    for _ in range(t):
+        p = int(input().strip())
+        b= (p - 1)
+        a = 2
+        print(a,b)
 
 
 # ---------- MAIN ----------
