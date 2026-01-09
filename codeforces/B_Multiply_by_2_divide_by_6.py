@@ -1,5 +1,5 @@
 # --------------------------------
-#  Problem : A_Skibidus_and_Amog_u
+#  Problem : B_Multiply_by_2_divide_by_6
 #  Author  : Md Isa Ahamed San
 #  Date    : 2026-01-09
 # --------------------------------
@@ -93,8 +93,22 @@ def upper_bound(arr, target):
 def solve():
     t = int(input().strip())
     for _ in range(t):
-        s = input().strip()
-        print(s[:-2]+"i")
+        n = int(input().strip())
+        count = 0
+        while n != 1:
+            if n%6 == 0:
+                n = n//6
+                count+=1
+            elif n%3 == 0:
+                n = n*2
+                count+=1
+            else:
+                count = -1
+                break
+        print(count)
+
+
+
 
 
 # ---------- MAIN ----------
