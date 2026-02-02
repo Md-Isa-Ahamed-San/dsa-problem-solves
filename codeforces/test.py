@@ -1,5 +1,4 @@
-def solve():
-    print(5 + 6 * 9 / 3)
-
-
-solve()
+t = int(input().strip())
+for _ in range(t):
+    s = input().strip()
+    print(int(s[0])+int(s[2]))

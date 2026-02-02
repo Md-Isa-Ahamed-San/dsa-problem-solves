@@ -1,7 +1,11 @@
-const a =new Date().getDate
-const aa =new Date().getMonth
-const aaa =new Date().getFullYear
+function outer(){
+    let count = 0
+    return function inner(){
+        count++
+        console.log(count)
+    }
+}
 
-console.log(a)
-console.log(aa)
-console.log(aaa)
+let o = outer()
+o() // 1
+o() //2
