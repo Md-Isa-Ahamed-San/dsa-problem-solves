@@ -1,5 +1,5 @@
 # --------------------------------
-#  Problem : tempCodeRunnerFile
+#  Problem : B_Simons_and_Cakes_for_Success
 #  Author  : Md Isa Ahamed San
 #  Date    : 2026-02-26
 # --------------------------------
@@ -91,7 +91,19 @@ def upper_bound(arr, target):
 
 # ---------- SOLVE ----------
 def solve():
-    
+    t = int(input().strip())
+    for _ in range(t):
+        n = int(input().strip())
+        x = 1
+        while x<5:
+            k = n**(x/n)
+            
+            print(k)
+            if k % 1 == 0:
+                print(k)
+                break
+            x+=1
+
 
 # ---------- MAIN ----------
 def main():
