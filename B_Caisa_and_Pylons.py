@@ -142,14 +142,21 @@ def upper_bound(arr, target):
 def solve():
     n = int(input().strip())
     arr = list(map(int, input().strip().split()))
-    diff = 0
+    pay = abs(0 - arr[0])
+    energy = 0
     for idx in range(n - 1):
-        diff += arr[idx] - arr[idx + 1]
-    print(diff)
-    if diff < 0:
-        print(arr[0] + abs(diff))
-    else:
-        print(abs(arr[0] - diff))
+        curr_diff = arr[idx] - arr[idx + 1]
+        if curr_diff < 0:  # energy khoroch or taka pay kora lagbe
+            # enough energy ase
+            if energy >= abs(curr_diff):
+                energy -= abs(curr_diff)
+            else:  # enough energy nai
+                pay += abs(curr_diff) - energy
+                energy = 0
+
+        else:  # enegy jog korte hobe
+            energy += curr_diff
+    print(pay)
 
 
 # ---------- MAIN ----------
