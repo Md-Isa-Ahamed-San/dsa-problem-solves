@@ -1,5 +1,5 @@
 # --------------------------------
-#  Problem : A_Cookies
+#  Problem : D_Deletive_Editing
 #  Author  : Md Isa Ahamed San
 #  Date    : 2026-03-20
 # --------------------------------
@@ -151,16 +151,25 @@ def build_graph(n, edges, directed=False):
 
 # ---------- SOLVE ----------
 def solve():
-    n = int(input().strip())
-    arr = list(map(int, input().strip().split()))
-    count = 0
-    total_sum = 0
-    for val in arr:
-        total_sum += val
-    for val in arr:
-        if is_even(total_sum - val):
-            count += 1
-    print(count)
+    t = int(input().strip())
+    for _ in range(t):
+        sentence, word = map(str, input().strip().split())
+        freq = {}
+        for char in word:
+            freq[char] = freq.get(char, 0) + 1
+        # r_word = reversed(word)
+        ans = []
+        # print(freq)
+        # print(r_word)
+        for char in reversed(sentence):
+            if freq.get(char, 0)> 0:
+                freq[char] -= 1
+                ans.append(char)
+        # print("".join(reversed(ans)))
+        if "".join(reversed(ans))==word:
+            yes()
+        else:
+            no()
 
 
 # ---------- MAIN ----------
