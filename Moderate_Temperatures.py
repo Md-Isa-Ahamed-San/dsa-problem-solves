@@ -1,10 +1,14 @@
 # --------------------------------
-#  Problem : D_OutOfMemoryError
+#  Problem : Moderate_Temperatures
 #  Author  : Md Isa Ahamed San
-#  Date    : 2026-01-18
+#  Date    : 2026-04-01
 # --------------------------------
 
 import sys
+import math
+from collections import defaultdict, deque, Counter
+from itertools import accumulate
+import heapq
 
 # ---------- FAST IO / PyPy Optimization ----------
 input = sys.stdin.readline
@@ -15,89 +19,55 @@ input = sys.stdin.readline
 MOD = 10**9 + 7
 INF = 10**18
 
-
 # ---------- BASIC IO ----------
-def ints():
-    return map(int, input().split())
-
-
-def list_ints():
-    return list(map(int, input().split()))
-
-
-def str_input():
-    return input().strip()
-
+def ints(): return map(int, input().split())
+def list_ints(): return list(map(int, input().split()))
+def str_input(): return input().strip()
 
 # ---------- DEBUG PRINT ----------
 DEBUG = False
-
-
 def debug(*args, **kwargs):
     if DEBUG:
         print(*args, **kwargs, file=sys.stderr)
 
-
 # ---------- COMMON OUTPUT ----------
-def yes():
-    print("YES")
-
-
-def no():
-    print("NO")
-
-
-def out(arr):
-    print(*arr)
-
+def yes(): print('YES')
+def no(): print('NO')
+def out(arr): print(*arr)
 
 # ---------- MATH UTILS ----------
-def is_even(number):
-    return (number & 1) == 0
-
-
-def is_odd(number):
-    return (number & 1) == 1
-
+def is_even(number): return (number & 1) == 0
+def is_odd(number): return (number & 1) == 1
 
 def gcd(first, second):
     while second:
         first, second = second, first % second
     return first
 
-
 def lcm(first, second):
     return first // gcd(first, second) * second
-
 
 def ceil_div(numerator, denominator):
     return (numerator + denominator - 1) // denominator
 
-
 # ---------- PRIME CHECK ----------
 def is_prime(value):
-    if value < 2:
-        return False
-    if value == 2:
-        return True
-    if value % 2 == 0:
-        return False
-    for divisor in range(3, int(value**0.5) + 1, 2):
-        if value % divisor == 0:
-            return False
+    if value < 2: return False
+    if value == 2: return True
+    if value % 2 == 0: return False
+    for divisor in range(3, int(value**0.5)+1, 2):
+        if value % divisor == 0: return False
     return True
-
 
 # ---------- SIEVE ----------
 def prime_list_sieve(limit):
-    prime_flags = [True] * (limit + 1)
+    prime_flags = [True]*(limit+1)
     prime_flags[0] = prime_flags[1] = False
-    for base in range(2, int(limit**0.5) + 1):
+    for base in range(2, int(limit**0.5)+1):
         if prime_flags[base]:
-            for multiple in range(base * base, limit + 1, base):
+            for multiple in range(base*base, limit+1, base):
                 prime_flags[multiple] = False
     return prime_flags
-
 
 # ---------- PREFIX / SUFFIX ----------
 def prefix_sum(arr):
@@ -106,14 +76,12 @@ def prefix_sum(arr):
         prefix.append(prefix[-1] + value)
     return prefix
 
-
 def suffix_sum(arr):
     size = len(arr)
-    suffix = [0] * (size + 1)
-    for index in range(size - 1, -1, -1):
-        suffix[index] = suffix[index + 1] + arr[index]
+    suffix = [0]*(size+1)
+    for index in range(size-1, -1, -1):
+        suffix[index] = suffix[index+1] + arr[index]
     return suffix
-
 
 # ---------- BINARY SEARCH ----------
 def lower_bound(arr, target):
@@ -126,7 +94,6 @@ def lower_bound(arr, target):
             right = mid
     return left
 
-
 def upper_bound(arr, target):
     left, right = 0, len(arr)
     while left < right:
@@ -137,48 +104,32 @@ def upper_bound(arr, target):
             right = mid
     return left
 
+# ---------- GRAPH UTIL ----------
+def build_graph(n, edges, directed=False):
+    g = defaultdict(list)
+    for u, v in edges:
+        g[u].append(v)
+        if not directed:
+            g[v].append(u)
+    return g
 
 # ---------- SOLVE ----------
-
-
-def main():
-    data = sys.stdin.read().split()
-    idx = 0
-
-    t = int(data[idx])
-    idx += 1
-
+def solve():
+    t = int(input().strip())
     for _ in range(t):
-        n = int(data[idx])
-        num_of_op = int(data[idx + 1])
-        highest_val = int(data[idx + 2])
-        idx += 3
+        n = int(input().strip())
+        arr = list_ints()
+        min_temp = min(arr)
+        max_temp= max(arr)
+        count = 0
+        for val in arr:
+            if val != min_temp and val!= max_temp:
+                count+=1
+        print(count)
 
-        base = list(map(int, data[idx : idx + n]))
-        print(base)
-        idx += n
+# ---------- MAIN ----------
+def main():
+    solve()
 
-        # store all queries upfront as list of tuples
-        queries = []
-        for _ in range(num_of_op):
-            b = int(data[idx])
-            c = int(data[idx + 1])
-            idx += 2
-            queries.append((b - 1, c))
-
-        prv = 0
-        for qq in range(num_of_op):
-            pos, c = queries[qq]
-            base[pos] += c
-
-            if base[pos] > highest_val:
-                for q2 in range(qq, prv - 1, -1):
-                    p2, c2 = queries[q2]
-                    base[p2] -= c2
-                prv = qq + 1
-
-        sys.stdout.write(" ".join(map(str, base)) + "\n")
-
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

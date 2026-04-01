@@ -1,10 +1,14 @@
 # --------------------------------
-#  Problem : D_OutOfMemoryError
+#  Problem : B_Simply_Sitting_on_Chairs
 #  Author  : Md Isa Ahamed San
-#  Date    : 2026-01-18
+#  Date    : 2026-03-31
 # --------------------------------
 
 import sys
+import math
+from collections import defaultdict, deque, Counter
+from itertools import accumulate
+import heapq
 
 # ---------- FAST IO / PyPy Optimization ----------
 input = sys.stdin.readline
@@ -138,46 +142,32 @@ def upper_bound(arr, target):
     return left
 
 
+# ---------- GRAPH UTIL ----------
+def build_graph(n, edges, directed=False):
+    g = defaultdict(list)
+    for u, v in edges:
+        g[u].append(v)
+        if not directed:
+            g[v].append(u)
+    return g
+
+
 # ---------- SOLVE ----------
-
-
-def main():
-    data = sys.stdin.read().split()
-    idx = 0
-
-    t = int(data[idx])
-    idx += 1
-
+def solve():
+    t = int(input().strip())
     for _ in range(t):
-        n = int(data[idx])
-        num_of_op = int(data[idx + 1])
-        highest_val = int(data[idx + 2])
-        idx += 3
+        n = int(input().strip())
+        arr = list(map(int, input().strip().split()))
+        count = 0
+        for i in range(n):
+            if arr[i] <= i + 1:
+                count += 1
+        print(count)
 
-        base = list(map(int, data[idx : idx + n]))
-        print(base)
-        idx += n
 
-        # store all queries upfront as list of tuples
-        queries = []
-        for _ in range(num_of_op):
-            b = int(data[idx])
-            c = int(data[idx + 1])
-            idx += 2
-            queries.append((b - 1, c))
-
-        prv = 0
-        for qq in range(num_of_op):
-            pos, c = queries[qq]
-            base[pos] += c
-
-            if base[pos] > highest_val:
-                for q2 in range(qq, prv - 1, -1):
-                    p2, c2 = queries[q2]
-                    base[p2] -= c2
-                prv = qq + 1
-
-        sys.stdout.write(" ".join(map(str, base)) + "\n")
+# ---------- MAIN ----------
+def main():
+    solve()
 
 
 if __name__ == "__main__":

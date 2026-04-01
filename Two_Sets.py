@@ -1,10 +1,14 @@
 # --------------------------------
-#  Problem : D_OutOfMemoryError
+#  Problem : Two_Sets
 #  Author  : Md Isa Ahamed San
-#  Date    : 2026-01-18
+#  Date    : 2026-04-01
 # --------------------------------
 
 import sys
+import math
+from collections import defaultdict, deque, Counter
+from itertools import accumulate
+import heapq
 
 # ---------- FAST IO / PyPy Optimization ----------
 input = sys.stdin.readline
@@ -138,46 +142,74 @@ def upper_bound(arr, target):
     return left
 
 
+# ---------- GRAPH UTIL ----------
+def build_graph(n, edges, directed=False):
+    g = defaultdict(list)
+    for u, v in edges:
+        g[u].append(v)
+        if not directed:
+            g[v].append(u)
+    return g
+
+
 # ---------- SOLVE ----------
+def solve():
+    n = int(input().strip())
+    if is_odd((n * (n + 1)) // 2):
+        no()
+    else:
+        yes()
+        b = []
+        a = []
+        a_turn = True
+        if is_even(n):
+            left = 1
+            right = n
+            while left < right:
+                if a_turn:
+                    a.append(left)
+                    a.append(right)
+                    left += 1
+                    right -= 1
+                    a_turn = False
+                else:
+                    b.append(left)
+                    b.append(right)
+                    left += 1
+                    right -= 1
+                    a_turn = True
+            print(n // 2)
+            print(*a)
+            print(n // 2)
+            print(*b)
+        else:  # n is odd
+            a.append(1)
+            left = 2
+            right = n
+            while right - left > 1:
+                if a_turn:
+                    a.append(left)
+                    a.append(right)
+                    left += 1
+                    right -= 1
+                    a_turn = False
+                else:
+                    b.append(left)
+                    b.append(right)
+                    left += 1
+                    right -= 1
+                    a_turn = True
+            a.append(left)
+            b.append(right)
+            print((n // 2) +1 )
+            print(*a)
+            print(n // 2)
+            print(*b)
 
 
+# ---------- MAIN ----------
 def main():
-    data = sys.stdin.read().split()
-    idx = 0
-
-    t = int(data[idx])
-    idx += 1
-
-    for _ in range(t):
-        n = int(data[idx])
-        num_of_op = int(data[idx + 1])
-        highest_val = int(data[idx + 2])
-        idx += 3
-
-        base = list(map(int, data[idx : idx + n]))
-        print(base)
-        idx += n
-
-        # store all queries upfront as list of tuples
-        queries = []
-        for _ in range(num_of_op):
-            b = int(data[idx])
-            c = int(data[idx + 1])
-            idx += 2
-            queries.append((b - 1, c))
-
-        prv = 0
-        for qq in range(num_of_op):
-            pos, c = queries[qq]
-            base[pos] += c
-
-            if base[pos] > highest_val:
-                for q2 in range(qq, prv - 1, -1):
-                    p2, c2 = queries[q2]
-                    base[p2] -= c2
-                prv = qq + 1
-
-        sys.stdout.write(" ".join(map(str, base)) + "\n")
+    solve()
 
 
 if __name__ == "__main__":
