@@ -115,14 +115,8 @@ def build_graph(n, edges, directed=False):
 
 # ---------- SOLVE ----------
 def solve():
-    limit = 200000
-    prime_flags = [True]*(limit+1)
-    prime_flags[0] = prime_flags[1] = False
-    for base in range(2, int(limit**0.5)+1):
-        if prime_flags[base]:
-            for multiple in range(base*base, limit+1, base):
-                prime_flags[multiple] = False
-    primes = [i for i in range(limit) if prime_flags[i]]
+    prime_flags = prime_list_sieve(200000)
+    primes = [i for i in range(200000 ) if prime_flags[i]]
     t = int(input())
     for _ in range(t):
         n = int(input())
