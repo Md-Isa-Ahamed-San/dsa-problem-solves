@@ -1,14 +1,11 @@
 # --------------------------------
-#  Problem : B_Pashmak_and_Flowers
+#  Problem : B_Jeff_and_Periods
 #  Author  : Md Isa Ahamed San
-#  Date    : 2026-04-10
+#  Date    : 2026-04-11
 # --------------------------------
 
 import sys
-import math
-from collections import defaultdict, deque, Counter
-from itertools import accumulate
-import heapq
+from collections import defaultdict
 
 # ---------- FAST IO / PyPy Optimization ----------
 input = sys.stdin.readline
@@ -18,59 +15,94 @@ input = sys.stdin.readline
 MOD = 10**9 + 7
 INF = 10**18
 
+
 # ---------- BASIC IO ----------
-def ints(): return map(int, input().split())
-def list_ints(): return list(map(int, input().split()))
-def str_input(): return input().strip()
+def ints():
+    return map(int, input().split())
+
+
+def list_ints():
+    return list(map(int, input().split()))
+
+
+def str_input():
+    return input().strip()
+
 
 # ---------- DEBUG PRINT ----------
 DEBUG = False
+
+
 def debug(*args, **kwargs):
     if DEBUG:
         print(*args, **kwargs, file=sys.stderr)
 
+
 # ---------- COMMON OUTPUT ----------
-def yes(): print('YES')
-def no(): print('NO')
-def out(arr): print(*arr)
+def yes():
+    print("YES")
+
+
+def no():
+    print("NO")
+
+
+def out(arr):
+    print(*arr)
+
 
 # ---------- MATH UTILS ----------
-def is_even(n): return (n & 1) == 0
-def is_odd(n): return (n & 1) == 1
+def is_even(n):
+    return (n & 1) == 0
+
+
+def is_odd(n):
+    return (n & 1) == 1
+
 
 def gcd(a, b):
     while b:
         a, b = b, a % b
     return a
 
+
 def lcm(a, b):
     return a // gcd(a, b) * b
+
 
 def ceil_div(a, b):
     return (a + b - 1) // b
 
+
 # ---------- PRIME CHECK ----------
 def is_prime(n):
-    if n < 2: return False
-    if n == 2: return True
-    if n % 2 == 0: return False
-    for d in range(3, int(n**0.5)+1, 2):
-        if n % d == 0: return False
+    if n < 2:
+        return False
+    if n == 2:
+        return True
+    if n % 2 == 0:
+        return False
+    for d in range(3, int(n**0.5) + 1, 2):
+        if n % d == 0:
+            return False
     return True
+
 
 # ---------- SIEVE ----------
 def prime_list_sieve(limit):
-    is_prime_arr = [True]*(limit+1)
+    is_prime_arr = [True] * (limit + 1)
     is_prime_arr[0] = is_prime_arr[1] = False
-    for p in range(2, int(limit**0.5)+1):
+    for p in range(2, int(limit**0.5) + 1):
         if is_prime_arr[p]:
-            for multiple in range(p*p, limit+1, p):
+            for multiple in range(p * p, limit + 1, p):
                 is_prime_arr[multiple] = False
     return is_prime_arr
 
+
 def prime_list(limit):
     flags = prime_list_sieve(limit)
-    return [p for p in range(limit+1) if flags[p]]
+    return [p for p in range(limit + 1) if flags[p]]
+
 
 # ---------- PREFIX / SUFFIX ----------
 def prefix_sum(arr):
@@ -79,29 +111,37 @@ def prefix_sum(arr):
         pre.append(pre[-1] + x)
     return pre
 
+
 def suffix_sum(arr):
     n = len(arr)
-    suf = [0]*(n+1)
-    for i in range(n-1, -1, -1):
-        suf[i] = suf[i+1] + arr[i]
+    suf = [0] * (n + 1)
+    for i in range(n - 1, -1, -1):
+        suf[i] = suf[i + 1] + arr[i]
     return suf
+
 
 # ---------- BINARY SEARCH ----------
 def lower_bound(arr, target):
     lo, hi = 0, len(arr)
     while lo < hi:
         mid = (lo + hi) // 2
-        if arr[mid] < target: lo = mid + 1
-        else: hi = mid
+        if arr[mid] < target:
+            lo = mid + 1
+        else:
+            hi = mid
     return lo
+
 
 def upper_bound(arr, target):
     lo, hi = 0, len(arr)
     while lo < hi:
         mid = (lo + hi) // 2
-        if arr[mid] <= target: lo = mid + 1
-        else: hi = mid
+        if arr[mid] <= target:
+            lo = mid + 1
+        else:
+            hi = mid
     return lo
+
 
 # ---------- GRAPH UTIL ----------
 def build_graph(n, edges, directed=False):
@@ -112,28 +152,38 @@ def build_graph(n, edges, directed=False):
             graph[v].append(u)
     return graph
 
+
 # ---------- SOLVE ----------
 def solve():
-    n=int(input().strip())
+    n = input().strip()
     arr = list_ints()
-    max_val = max(arr)
-    min_val = min(arr)
-    count_min_val = arr.count(min_val)
-    count_max_val = arr.count(max_val)
-    # print(count_min_val, count_max_val)
+    freq = {}
 
-    if max_val==1:
-        
+    for idx, item in enumerate(arr):
+        if item in freq:
+            freq[item].append(idx + 1)
+        else:
+            freq[item] = [idx + 1]
 
+    result = []
+    count = 0
+    for k, val in sorted(freq.items()):
+        if len(val) == 1:
+            result.append((k, 0))
 
-    if min_val == max_val:
-        print(0,math.comb(count_min_val, 2))
-    else:
-        print(max_val-min_val , count_min_val*count_max_val)
+        else:
+            gap = val[1] - val[0]
+            if all(val[i + 1] - val[i] == gap for i in range(len(val) - 1)):
+                result.append((k, gap))
+    print(len(result))
+    for k, p in result:
+        print(k, p)
+
 
 # ---------- MAIN ----------
 def main():
     solve()
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()
