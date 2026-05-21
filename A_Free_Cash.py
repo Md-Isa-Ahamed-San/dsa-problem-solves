@@ -1,7 +1,7 @@
 # --------------------------------
-#  Problem : Maximum_Subarray_Sum
+#  Problem : A_Free_Cash
 #  Author  : Md Isa Ahamed San
-#  Date    : 2026-05-18
+#  Date    : 2026-05-21
 # --------------------------------
 
 import sys
@@ -156,14 +156,18 @@ def build_graph(n, edges, directed=False):
 # ---------- SOLVE ----------
 def solve():
     n = int(input().strip())
-    arr = list_ints()
-    max_val = -INF
-    s = 0
+    arr = []
+    for _ in range(n):
+        hour, minute = input().strip().split()
+        arr.append(hour + " " + minute)
+    freq = {}
+
     for val in arr:
-        s += val
-        max_val = max(max_val, s)
-        if s < 0:
-            s = 0
+        freq[val] = freq.get(val, 0) + 1
+    max_val = -INF
+    for val in freq.values():
+        max_val = max(max_val, val)
+    # print(freq)
     print(max_val)
 
 
