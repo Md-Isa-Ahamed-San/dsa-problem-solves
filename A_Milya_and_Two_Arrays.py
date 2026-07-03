@@ -103,14 +103,6 @@ def upper_bound(arr, target):
         else: hi = mid
     return lo
 
-# ---------- GRAPH UTIL ----------
-def build_graph(n, edges, directed=False):
-    graph = defaultdict(list)
-    for u, v in edges:
-        graph[u].append(v)
-        if not directed:
-            graph[v].append(u)
-    return graph
 
 # ---------- SOLVE ----------
 def solve():
