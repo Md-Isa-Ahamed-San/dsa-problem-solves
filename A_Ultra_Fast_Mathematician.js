@@ -62,3 +62,21 @@ if (name=== "nasrin"){  --> true=== true --> true
 else{
     console.log("not abc")
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
