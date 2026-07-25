@@ -1,18 +1,18 @@
 // @ts-nocheck
 
-
-
-function arr(array){
-    let even = [];
-    for(let i = 0; i < array.length; i++){
-        if(array[i] % 2 === 0){
-            even.push(array[i])
-        }
-    }
-
-    return even;
+x = 0;
+if (x > 0) {
+  console.log("x is  positive");
+} else if (x < 0) {
+  console.log("x is negative");
+} else if (x == 0) {
+  console.log("x is zero");
+}
+else {
+  console.log("x is not a number");
 }
 
-let number = arr([22,34,55,68,75,65])
-console.log(number);
 
+// if (x > 10) {
+//   console.log("x is greater than 10");
+// }
