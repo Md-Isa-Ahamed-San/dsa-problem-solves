@@ -1,18 +1,18 @@
-let str = "I love my country"
+// @ts-nocheck
 
-let reversed=""
-let start = str.length-1
 
-for (let i =start;i>=0;i--){
-    // console.log(str[i])
-    reversed+=str[i]
-    
-    // console.log(reversed)
+
+function arr(array){
+    let even = [];
+    for(let i = 0; i < array.length; i++){
+        if(array[i] % 2 === 0){
+            even.push(array[i])
+        }
+    }
+
+    return even;
 }
-console.log(reversed)
 
-
-
-
-
+let number = arr([22,34,55,68,75,65])
+console.log(number);
 

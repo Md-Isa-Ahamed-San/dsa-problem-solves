@@ -1,5 +1,8 @@
 {
+  "editor.foldingStrategy": "auto",
+  "editor.showFoldingControls": "always",
   "files.associations": {
     "iostream": "cpp"
-  }
+  },
+  "editor.foldingImportsByDefault": true
 }
