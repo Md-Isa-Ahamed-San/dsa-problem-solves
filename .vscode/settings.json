@@ -4,5 +4,7 @@
   "files.associations": {
     "iostream": "cpp"
   },
-  "editor.foldingImportsByDefault": true
+  "editor.foldingImportsByDefault": true,
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 500
 }

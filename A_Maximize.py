@@ -1,5 +1,5 @@
 # --------------------------------
-#  Problem : C_Product_of_Three_Numbers
+#  Problem : A_Maximize
 #  Rating  : auto from Codeforces
 #  Tags    : auto from Codeforces
 #  Author  : Md Isa Ahamed San
@@ -74,7 +74,11 @@ def suffix_sum(arr):
 
 # ---------- SOLVE ----------
 def solve():
-    
+     t= int(input().strip())
+     for _ in range(t):
+        n = int(input().strip())
+        print(n-1)
+
 
 # ---------- MAIN ----------
 def main():

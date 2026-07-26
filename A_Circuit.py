@@ -1,5 +1,5 @@
 # --------------------------------
-#  Problem : C_Product_of_Three_Numbers
+#  Problem : A_Circuit
 #  Rating  : auto from Codeforces
 #  Tags    : auto from Codeforces
 #  Author  : Md Isa Ahamed San
@@ -22,39 +22,69 @@ input = sys.stdin.readline
 MOD = 10**9 + 7
 INF = 10**18
 
+
 # ---------- BASIC IO ----------
-def ints(): return map(int, input().split())
-def list_ints(): return list(map(int, input().split()))
-def str_input(): return input().strip()
+def ints():
+    return map(int, input().split())
+
+
+def list_ints():
+    return list(map(int, input().split()))
+
+
+def str_input():
+    return input().strip()
+
 
 # ---------- COMMON OUTPUT ----------
-def yes(): print('YES')
-def no(): print('NO')
-def out(arr): print(*arr)
+def yes():
+    print("YES")
+
+
+def no():
+    print("NO")
+
+
+def out(arr):
+    print(*arr)
+
 
 # ---------- MATH UTILS ----------
-def is_even(n): return (n & 1) == 0
-def is_odd(n): return (n & 1) == 1
+def is_even(n):
+    return (n & 1) == 0
+
+
+def is_odd(n):
+    return (n & 1) == 1
+
 
 def gcd(a, b):
     while b:
         a, b = b, a % b
     return a
 
+
 def lcm(a, b):
     return a // gcd(a, b) * b
+
 
 def ceil_div(a, b):
     return (a + b - 1) // b
 
+
 # ---------- PRIME CHECK ----------
 def is_prime(n):
-    if n < 2: return False
-    if n == 2: return True
-    if n % 2 == 0: return False
-    for d in range(3, int(n**0.5)+1, 2):
-        if n % d == 0: return False
+    if n < 2:
+        return False
+    if n == 2:
+        return True
+    if n % 2 == 0:
+        return False
+    for d in range(3, int(n**0.5) + 1, 2):
+        if n % d == 0:
+            return False
     return True
+
 
 # ---------- PREFIX / SUFFIX ----------
 def prefix_sum(arr):
@@ -63,6 +93,7 @@ def prefix_sum(arr):
         pre.append(pre[-1] + x)
     return pre
 
+
 def suffix_sum(arr):
     n = len(arr)
     suf = [0] * (n + 1)
@@ -70,15 +101,36 @@ def suffix_sum(arr):
         suf[i] = suf[i + 1] + arr[i]
     return suf
 
+
 # endregion
+
 
 # ---------- SOLVE ----------
 def solve():
-    
+    t = int(input().strip())
+    for _ in range(t):
+        light_pair = int(input().strip())
+        lights = list_ints()
+        count_1 = 0
+        count_0 = 0
+        for val in lights:
+            if val == 1:
+                count_1 += 1
+            else:
+                count_0 += 1
+        if is_even(count_1):
+            if count_1 == 2 and len(lights) == 2:
+                print(0, 0)
+            else:
+                print(0, min(count_1, count_0))
+        else:
+            print(1, min(count_1, count_0))
+
 
 # ---------- MAIN ----------
 def main():
     solve()
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

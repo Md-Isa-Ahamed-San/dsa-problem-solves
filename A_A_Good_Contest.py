@@ -1,7 +1,7 @@
 # --------------------------------
-#  Problem : A_A_Good_Contest
-#  Author  : Md Isa Ahamed San
-#  Date    : 2026-03-27
+#  Problem : A Good Contest
+#  Rating  : 800
+#  Tags    : implementation
 # --------------------------------
 
 import sys
