@@ -1,9 +1,9 @@
 # --------------------------------
-#  Problem : C_Product_of_Three_Numbers
+#  Problem : B_Turtle_Math_Fast_Three_Task
 #  Rating  : auto from Codeforces
 #  Tags    : auto from Codeforces
 #  Author  : Md Isa Ahamed San
-#  Date    : 2026-07-25
+#  Date    : 2026-07-27
 # --------------------------------
 
 # region TEMPLATE
@@ -107,30 +107,31 @@ def suffix_sum(arr):
 
 # ---------- SOLVE ----------
 def solve():
-    t = int(input())
+    t = int(input().strip())
     for _ in range(t):
-        n = int(input())
+        n = int(input().strip())
+        nums = list_ints()
+        total_sum = 0
+        for val in nums:
+            total_sum += val
+
+        if total_sum % 3 == 0:
+            print(0)
+            continue
         found = False
-
-        for a in range(2, int(n**0.5) + 2):
-            if found:
+        for val in nums:
+            if (total_sum - val) % 3 == 0:
+                print(1)
+                found = True
                 break
-            if n % a == 0:
-                rest = n // a
-                for b in range(a + 1, int(rest**0.5) + 2):
-                    if rest % b == 0:
-                        c = rest // b
-
-                        if c > b:
-                            print("YES")
-                            print(a, b, c)
-                            found = True
-                            break
 
         if not found:
-            print("NO")
-
-
+            if total_sum % 3 == 2:
+                print(1)
+            else:
+                print(2)
+        else:
+            continue
 
 
 # ---------- MAIN ----------

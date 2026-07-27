@@ -1,9 +1,9 @@
 # --------------------------------
-#  Problem : C_Product_of_Three_Numbers
+#  Problem : A_Ian_Visits_Mary
 #  Rating  : auto from Codeforces
 #  Tags    : auto from Codeforces
 #  Author  : Md Isa Ahamed San
-#  Date    : 2026-07-25
+#  Date    : 2026-07-27
 # --------------------------------
 
 # region TEMPLATE
@@ -107,30 +107,16 @@ def suffix_sum(arr):
 
 # ---------- SOLVE ----------
 def solve():
-    t = int(input())
+    t = int(input().strip())
     for _ in range(t):
-        n = int(input())
-        found = False
-
-        for a in range(2, int(n**0.5) + 2):
-            if found:
-                break
-            if n % a == 0:
-                rest = n // a
-                for b in range(a + 1, int(rest**0.5) + 2):
-                    if rest % b == 0:
-                        c = rest // b
-
-                        if c > b:
-                            print("YES")
-                            print(a, b, c)
-                            found = True
-                            break
-
-        if not found:
-            print("NO")
-
-
+        x, y = map(int, input().strip().split())
+        if gcd(x, y) == 1:
+            print(1)
+            print(x, y)
+        else:
+            print(2)
+            print(1,y-1)
+            print(x, y)
 
 
 # ---------- MAIN ----------
