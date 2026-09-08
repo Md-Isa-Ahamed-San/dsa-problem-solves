@@ -1,9 +1,9 @@
 # --------------------------------
-#  Problem : C_Pacer
+#  Problem : D_Destruction_of_the_Dandelion_Fields
 #  Rating  : auto from Codeforces
 #  Tags    : auto from Codeforces
 #  Author  : Md Isa Ahamed San
-#  Date    : 2026-09-02
+#  Date    : 2026-09-04
 # --------------------------------
 
 # region TEMPLATE
@@ -109,39 +109,28 @@ def suffix_sum(arr):
 def solve():
     t = int(input().strip())
     for _ in range(t):
-        n, m = map(int, input().strip().split())
-        lists = []
-        lists.append([0, 0])
-        for _ in range(n):
-            a, b = map(int, input().strip().split())
-            lists.append([a, b])
-        # print(lists)
-        count = 0
+        n = int(input().strip())
+        arr = list_ints()
+        odds = []
+        evens = []
 
-        for i in range(1, len(lists)):
-            x0, y0 = lists[i - 1]
-            x, y = lists[i]
-            x_diff = x - x0
-            # print("x and x0: ",x,x0)
-            # print("x_diff: ",x_diff)
-            if y0 == y:
-                if x_diff == 1:
-                    continue
-                else:
-                    if is_even(x_diff):
-                        count += x_diff
-                    else:
-                        count += x_diff - 1
-
-            else:  # y0!=y
-                if x_diff == 1:
-                    count += 1
-                elif is_even(x_diff):
-                    count += x_diff - 1
-                else:
-                    count += x_diff
-        count += m - lists[-1][0]
-        print(count)
+        total_counts = 0
+        for val in arr:
+            if is_even(val):
+                evens.append(val)
+            else:
+                odds.append(val)
+        odds.sort(reverse=True)
+        if len(odds) == 0:
+            print(0)
+        else:
+            total_counts += sum(evens)
+            # print(total_counts)
+            odd_counts = math.ceil(len(odds) / 2)
+            # print(odd_counts, odds)
+            for i in range(odd_counts):
+                total_counts += odds[i]
+            print(total_counts)
 
 
 # ---------- MAIN ----------

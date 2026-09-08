@@ -94,15 +94,19 @@ def solve():
     t = int(input().strip())
     for _ in range(t):
         n = int(input().strip())
-        x = 1
-        while x<5:
-            k = n**(x/n)
-            
-            print(k)
-            if k % 1 == 0:
-                print(k)
-                break
-            x+=1
+        ans=1
+        d=2
+        while d*d <=n:
+            if n%d==0:
+                ans*=d
+            # print(ans)
+            while n%d==0:
+                n//=d
+            d+=1
+        if n>1:
+            ans*=n
+        print(ans)
+        # print("-------------------")
 
 
 # ---------- MAIN ----------
