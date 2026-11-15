@@ -114,27 +114,46 @@ def solve():
         if s == s[::-1]:
             print(0)
             continue
-        left = n // 2 - 1
-        right = 0
-        if is_even(n):
-            right = n // 2
-        else:
-            right = n // 2 + 1
-        print(left, right)
+        pairs = []
+        for i in range(n // 2):
+            p = [s[i], s[n - i - 1]]
+            p.sort()
+            pairs.append(p)
+        pairs.sort()
+        most_left = most_right = 0
         count = 0
-        while left > 0:
-            curr_left_val = ord(s[left])
-            curr_right_val = ord(s[right])
-            count += abs(curr_left_val - curr_right_val)
-            max_val = max(curr_left_val, curr_right_val)
-            left -= 1
-            right += 1
-            if left > 0:
-                future_left_val = ord(s[left])
-                future_right_val = ord(s[right])
-                if 
+        # print(pairs)
+        for pair in pairs:
+            left = ord(pair[0])
+            right = ord(pair[1])
+            if left == right:
+                continue
+            if most_left == 0:
+                most_left = left
+                most_right = right
+                count += most_right - most_left
+                # print("zero")
+            else:
+                # 4 condition. 1 between . 2. left side extend . 3. right side extend 4. outside
 
-        print(ord("a") - ord("c"))
+                if left >= most_left and right <= most_right:
+                    # print("first")
+                    continue
+                elif left < most_left and right <= most_right and right >= most_left:
+                    # print('second')
+                    count += most_left - left
+                    most_left = left
+                elif left >= most_left and right > most_right and left <= most_right:
+                    # print('three')
+                    count += right - most_right
+                    most_right = right
+                else:
+                    count += right - left
+                    # print('four')
+                    most_left = left
+                    most_right = right
+            # print(count)
+        print(count)
 
 
 # ---------- MAIN ----------
