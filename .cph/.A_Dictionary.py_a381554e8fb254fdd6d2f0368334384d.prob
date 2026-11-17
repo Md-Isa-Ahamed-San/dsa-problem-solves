@@ -1,0 +1,1 @@
+{"name":"Local: A_Dictionary","url":"f:\\study-material\\CSE\\Codes\\dsa-problems-solve\\A_Dictionary.py","tests":[{"id":1794943074874,"input":"7\nab\nac\naz\nba\nbc\nzx\nzy","output":"1\n2\n25\n26\n27\n649\n650"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"f:\\study-material\\CSE\\Codes\\dsa-problems-solve\\A_Dictionary.py","group":"local","local":true}
